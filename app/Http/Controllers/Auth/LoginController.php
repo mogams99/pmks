@@ -17,7 +17,7 @@ class LoginController extends Controller
     {
         $response = null;
         // ? lakukan proses otentikasi di sini
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
             // ? jika otentikasi berhasil
