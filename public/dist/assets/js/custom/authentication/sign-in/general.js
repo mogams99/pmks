@@ -14,21 +14,28 @@ var KTSigninGeneral = function() {
 			form,
 			{
 				fields: {					
-					'email': {
+					// 'email': {
+                    //     validators: {
+                    //         regexp: {
+                    //             regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    //             message: 'The value is not a valid email address',
+                    //         },
+					// 		notEmpty: {
+					// 			message: 'Email address is required'
+					// 		}
+					// 	}
+					// },
+                    'username': {
                         validators: {
-                            regexp: {
-                                regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'The value is not a valid email address',
-                            },
 							notEmpty: {
-								message: 'Email address is required'
+								message: 'Username harus di isi!'
 							}
 						}
 					},
                     'password': {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required'
+                                message: 'Katasandi harus di isi!'
                             }
                         }
                     } 

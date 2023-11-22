@@ -38,16 +38,19 @@ $currentRouteName = Route::currentRouteName();
             <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
                 <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                     <div class="d-flex flex-center flex-column-fluid pb-15 pb-lg-20">
-                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form">
                         <!-- <form class="form w-100" action="{{ route('login_process') }}" method="post"> -->
+                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form">
                             @csrf
                             <div class="text-center mb-11">
                                 <h1 class="text-dark fw-bolder mb-3">PMKS</h1>
                                 <div class="text-gray-500 fw-semibold fs-6">Penyandang Masalah Kesejahteraan Sosial dan
                                     Tipiring</div>
                             </div>
-                            <div class="fv-row mb-8">
+                            <!-- <div class="fv-row mb-8">
                                 <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+                            </div> -->
+                            <div class="fv-row mb-8">
+                                <input type="text" placeholder="Username" name="username" autocomplete="off" class="form-control bg-transparent" />
                             </div>
                             <div class="fv-row mb-5">
                                 <input type="password" placeholder="Password" name="password" autocomplete="off" class="form-control bg-transparent" />
