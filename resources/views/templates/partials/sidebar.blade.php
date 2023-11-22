@@ -11,73 +11,69 @@
             class="app-sidebar-menu-primary menu menu-column menu-rounded menu-sub-indention menu-state-bullet-primary px-6 mb-5">
             <!--begin:Menu item-->
             <div data-kt-menu-trigger="click" class="menu-item here show menu-accordion">
-                <!--begin:Menu item-->
-                <!--begin:Menu link-->
-                <a class="menu-link active" href="{{ route('dashboard') }}">
-                    <span class="menu-icon">
-                        <i class="fonticon-house fs-2"></i>
-                    </span>
-                    <span class="menu-title">Dashboard</span>
-                </a>
-                <!--end:Menu link-->
-                <!--end:Menu item-->
-                <!--begin:Menu link-->
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <i class="fonticon-stats fs-2"></i>
-                    </span>
-                    <span class="menu-title">Manajemen User</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <!--end:Menu link-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link active" href="../../demo39/dist/index.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
+                @foreach ($access as $key => $value)
+                    @php
+                        $menu = $value->menu;
+                        $menu_arrays = $menu->toArray();
+                        $submenu_arrays = $menu->sub_menus()->get();
+                        $current_route = request()->route()->getName();
+                        $is_show = '';
+
+                        if ($menu_arrays['parent_id'] === null) {
+                            if ($current_route === $menu_arrays['url']) {
+                                $is_show = 'show';
+                            }
+
+                            foreach ($submenu_arrays as $submenu) {
+                            $separate = strstr($submenu->url, '.', true);
+                            $submenu_active = $separate.'*';
+                                if (request()->is($submenu_active)) {
+                                    $is_show = 'show';
+                                    break;
+                                }
+                            }
+                        }
+                    @endphp
+                    
+                    @if ($menu_arrays['parent_id'] === null)
+                        @if ($submenu_arrays->count() > 0)
+                            <span class="menu-link">
+                                <span class="menu-icon">
+                                    <i class="fonticon-stats fs-2"></i>
+                                </span>
+                                <span class="menu-title">{{ $menu_arrays['name'] }}</span>
+                                <span class="menu-arrow"></span>
                             </span>
-                            <span class="menu-title">User</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                </div>
-                <!--end:Menu sub-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="../../demo39/dist/index.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Role</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                </div>
-                <!--end:Menu sub-->
-                <!--begin:Menu sub-->
-                <div class="menu-sub menu-sub-accordion">
-                    <!--begin:Menu item-->
-                    <div class="menu-item">
-                        <!--begin:Menu link-->
-                        <a class="menu-link" href="../../demo39/dist/index.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Permissions</span>
-                        </a>
-                        <!--end:Menu link-->
-                    </div>
-                    <!--end:Menu item-->
-                </div>
-                <!--end:Menu sub-->
+                            @foreach ($submenu_arrays as $submenu)
+                            @php
+                                $separate = strstr($submenu->url, '.', true);
+                                $submenu_active = $separate.'*';
+                            @endphp
+                            <div class="menu-sub menu-sub-accordion">
+                                <div class="menu-item">
+                                    <a class="menu-link {{ request()->is($submenu_active) ? 'active' : '' }}" href="{{ route($submenu->url) }}">
+                                        <span class="menu-bullet">
+                                            <span class="bullet bullet-dot"></span>
+                                        </span>
+                                        <span class="menu-title">User</span>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        @else
+                            <!--begin:Menu item-->
+                            <!--begin:Menu link-->
+                            <a class="menu-link {{ request()->is($menu_arrays['url']) ? 'active' : '' }}" href="{{ route($menu_arrays['url']) }}">
+                                <span class="menu-icon">
+                                    <i class="{{ $menu_arrays['icon'] }} fs-2"></i>
+                                </span>
+                                <span class="menu-title">{{ $menu_arrays['name'] }}</span>
+                            </a>
+                            <!--end:Menu link-->
+                            <!--end:Menu item-->
+                        @endif
+                    @endif
+                @endforeach
             </div>
             <!--end:Menu item-->
         </div>
