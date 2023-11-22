@@ -23,4 +23,5 @@
     <link href="dist/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="dist/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
     <!--end::Global Stylesheets Bundle-->
+    @stack('styles')
 </head>
