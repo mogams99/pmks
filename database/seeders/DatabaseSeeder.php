@@ -22,9 +22,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // ? merefresh (mengatur ulang) ID untuk tabel users
-        DB::statement('TRUNCATE TABLE roles, users RESTART IDENTITY CASCADE');
+        DB::statement('TRUNCATE TABLE roles, users, menus, role_user, accesses RESTART IDENTITY CASCADE');
 
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(MenuSeeder::class);
+        $this->call(RoleUserSeeder::class);
+        $this->call(AccessesSeeder::class);
     }
 }

@@ -25,7 +25,7 @@ class LoginController extends Controller
                 'status' => true,
                 'code' => 200,
                 'message' => 'Anda berhasil login sebagai user, mohon ditunggu sebentar.',
-                'redirect' => route('dashboard'), // ? sesuaikan dengan rute yang sesuai
+                'redirect' => route('dashboard.index'), // ? sesuaikan dengan rute yang sesuai
             ];
         } else {
             // ? jika otentikasi gagal

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,10 @@ Route::post('/login', [LoginController::class, 'login'])->name('login_process');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'access_check'])->group(function () {
-    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    // Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('/dashboard', DashboardController::class)->name('dashboard.index');
+    Route::get('/1', function () { echo 'Not Found'; })->name('1');
+    Route::get('/2', function () { echo 'Not Found'; })->name('2');
+    Route::get('/3', function () { echo 'Not Found'; })->name('3');
+    Route::get('/4', function () { echo 'Not Found'; })->name('4');
 });
