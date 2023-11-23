@@ -19,7 +19,7 @@ class MenuSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Dashboard',
                 'icon' => 'fonticon-house',
-                'url' => 'dashboard',
+                'url' => 'dashboard.index',
                 'order' => 1,
                 'status' => true,
                 'created_by' => 1,
@@ -49,7 +49,7 @@ class MenuSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Manajemen User',
                 'icon' => null, // Kolom icon diisi dengan null
-                'url' => null, // Kolom url diisi dengan null
+                'url' => '3', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
                 'created_by' => 1,
@@ -59,7 +59,37 @@ class MenuSeeder extends Seeder
                 'id' => 5,
                 'name' => 'User',
                 'icon' => null, // Kolom icon diisi dengan null
-                'url' => null, // Kolom url diisi dengan null
+                'url' => '4', // Kolom url diisi dengan null
+                'order' => 3,
+                'status' => true,
+                'created_by' => 1,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'id' => 6,
+                'name' => 'Role',
+                'icon' => null, // Kolom icon diisi dengan null
+                'url' => '5', // Kolom url diisi dengan null
+                'order' => 3,
+                'status' => true,
+                'created_by' => 1,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'id' => 7,
+                'name' => 'Role',
+                'icon' => null, // Kolom icon diisi dengan null
+                'url' => '6', // Kolom url diisi dengan null
+                'order' => 3,
+                'status' => true,
+                'created_by' => 1,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'id' => 8,
+                'name' => 'Test',
+                'icon' => null, // Kolom icon diisi dengan null
+                'url' => '7', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
                 'created_by' => 1,
