@@ -32,7 +32,8 @@ Route::middleware(['auth', 'access_check'])->group(function () {
     Route::get('/6', function () { echo 'Not Found'; })->name('6');
     Route::get('/7', function () { echo 'Not Found'; })->name('7');
 
-    Route::prefix('/master')->group(function () {
+    Route::prefix('/master')->group(function () { 
+        Route::get('/opd/data', [OpdController::class, 'data'])->name('opd.data');
         Route::resource('/opd', OpdController::class);
     });
 });

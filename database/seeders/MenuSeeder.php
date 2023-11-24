@@ -19,6 +19,7 @@ class MenuSeeder extends Seeder
                 'id' => 1,
                 'name' => 'Dashboard',
                 'icon' => 'fonticon-house',
+                'parent_id' => null,
                 'url' => 'dashboard.index',
                 'order' => 1,
                 'status' => true,
@@ -29,6 +30,7 @@ class MenuSeeder extends Seeder
                 'id' => 2,
                 'name' => 'Master',
                 'icon' => 'bi bi-database-check',
+                'parent_id' => null,
                 'url' => '1',
                 'order' => 2,
                 'status' => true,
@@ -39,6 +41,7 @@ class MenuSeeder extends Seeder
                 'id' => 3,
                 'name' => 'Transaksi',
                 'icon' => 'bi bi-list-check',
+                'parent_id' => null,
                 'url' => '2',
                 'order' => 3,
                 'status' => true,
@@ -49,6 +52,7 @@ class MenuSeeder extends Seeder
                 'id' => 4,
                 'name' => 'Manajemen User',
                 'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 2,
                 'url' => '3', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
@@ -59,6 +63,7 @@ class MenuSeeder extends Seeder
                 'id' => 5,
                 'name' => 'User',
                 'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 4,
                 'url' => '4', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
@@ -69,6 +74,7 @@ class MenuSeeder extends Seeder
                 'id' => 6,
                 'name' => 'Role',
                 'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 4,
                 'url' => '5', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
@@ -77,8 +83,9 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 7,
-                'name' => 'Role',
+                'name' => 'Akses',
                 'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 4,
                 'url' => '6', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
@@ -87,9 +94,10 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 8,
-                'name' => 'Test',
+                'name' => 'OPD',
                 'icon' => null, // Kolom icon diisi dengan null
-                'url' => '7', // Kolom url diisi dengan null
+                'parent_id' => 2,
+                'url' => 'opd.index', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
                 'created_by' => 1,

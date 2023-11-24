@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOpdRequest;
 use App\Http\Requests\UpdateOpdRequest;
 use App\Models\Opd;
+use Yajra\DataTables\DataTables;
 
 class OpdController extends Controller
 {
@@ -14,8 +15,22 @@ class OpdController extends Controller
      */
     public function index()
     {
-        //
         return view('master.opd.index');
+    }
+
+    public function data(Opd $opd)
+    {
+        $data = $opd->select('id', 'peruntukans_id', 'nama')->with('peruntukans')->get();
+        
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->editColumn('nama', function ($data) {
+                return ucwords($data->nama);
+            })
+            ->addColumn('peruntukans', function ($data) {
+                return ucwords($data->peruntukans->nama);
+            })
+            ->toJson();
     }
 
     /**
