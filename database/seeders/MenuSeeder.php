@@ -71,7 +71,7 @@ class MenuSeeder extends Seeder
                 'url' => '4', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
-                'active' => null,
+                'active' => 'user',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
@@ -83,7 +83,7 @@ class MenuSeeder extends Seeder
                 'url' => '5', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
-                'active' => null,
+                'active' => 'role',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
@@ -95,7 +95,7 @@ class MenuSeeder extends Seeder
                 'url' => '6', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
-                'active' => null,
+                'active' => 'akses',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
@@ -107,7 +107,7 @@ class MenuSeeder extends Seeder
                 'url' => 'opd.index', // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
-                'active' => null,
+                'active' => 'opd',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],

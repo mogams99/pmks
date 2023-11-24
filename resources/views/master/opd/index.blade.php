@@ -10,8 +10,8 @@
     <div id="kt_app_content" class="app-content flex-column-fluid">
         <div id="kt_app_content_container" class="app-container container-fluid">
             <div class="row g-5 g-xl-10">
-                <div class="col-xl">
-                    <div class="card shadow-sm">
+                <div class="col-xl mb-md-5 mb-xl-10">
+                    <div class="card card-xl-stretch mb-xl-8 shadow-sm">
                         <div class="card-body p-3">
                             <div class="table-responsive">
                                 <table id="dt_index" class="table table-striped table-bordered gy-5 gs-7 rounded mb-0">
@@ -302,4 +302,4 @@
             }
         </script>
     @endpush
-@endsection``
+@endsection

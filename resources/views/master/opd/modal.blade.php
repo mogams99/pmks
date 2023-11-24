@@ -5,7 +5,8 @@
                 <h3 class="modal-title">Modal title</h3>
 
                 <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
                 <!--end::Close-->
@@ -21,13 +22,19 @@
                         <input type="text" class="form-control" placeholder="nama" aria-label="nama"
                             aria-describedby="basic-addon1" name="nama" id="nama" />
                     </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="submitForm(this.form)">Save changes</button>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="submitForm(this.form)">Save
+                            changes</button>
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
     </div>
 </div>

@@ -40,9 +40,6 @@
             <!--begin::Header-->
             @include('templates.partials.navbar')
             <!--end::Header-->
-            <!--begin::Separator-->
-            <div class="app-header-separator"></div>
-            <!--end::Separator-->
             <!--begin::Wrapper-->
             <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                 <!--begin::Sidebar-->
