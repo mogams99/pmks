@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('url')->nullable()->default(null);
             $table->integer('order');
             $table->boolean('status')->default(true);
+            $table->string('active')->nullable()->default(null);
             $table->unsignedBigInteger('created_by')->nullable()->default(null);
             $table->unsignedBigInteger('updated_by')->nullable()->default(null);
             $table->unsignedBigInteger('deleted_by')->nullable()->default(null);

@@ -21,7 +21,7 @@ class OpdController extends Controller
     public function data(Opd $opd)
     {
         $data = $opd->select('id', 'peruntukans_id', 'nama')->with('peruntukans')->get();
-        
+
         return DataTables::of($data)
             ->addIndexColumn()
             ->editColumn('nama', function ($data) {
@@ -46,7 +46,7 @@ class OpdController extends Controller
      */
     public function store(StoreOpdRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
