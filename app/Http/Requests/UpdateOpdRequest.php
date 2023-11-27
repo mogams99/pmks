@@ -11,7 +11,7 @@ class UpdateOpdRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateOpdRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'peruntukans_id' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            // ? tambahkan aturan validasi untuk field lain jika diperlukan
         ];
     }
 }

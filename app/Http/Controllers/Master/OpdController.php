@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Master;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreOpdRequest;
 use App\Http\Requests\UpdateOpdRequest;
 use App\Models\Opd;
+use App\Models\Peruntukan;
 use Yajra\DataTables\DataTables;
 
 class OpdController extends Controller
@@ -30,7 +32,17 @@ class OpdController extends Controller
             ->addColumn('peruntukans', function ($data) {
                 return ucwords($data->peruntukans->nama);
             })
-            ->toJson();
+            ->addColumn('action', function ($data) {
+                return view('master.opd.action', compact('data'));
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function dataPeruntukan(Peruntukan $prt)
+    {
+        $data = $prt->all();
+        return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 
     /**
@@ -46,7 +58,19 @@ class OpdController extends Controller
      */
     public function store(StoreOpdRequest $request)
     {
-        dd($request->all());
+        try {
+            // Membuat dan menyimpan record ke database
+            Opd::create($request->all());
+
+            // Memberikan respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil menyimpan data!', null, []);
+        } catch (QueryException $e) {
+            // Menangani kesalahan query
+            return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan saat menyimpan data.', null, []);
+        } catch (\Exception $e) {
+            // Menangani kesalahan umum
+            return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan.', null, []);
+        }
     }
 
     /**
@@ -55,6 +79,8 @@ class OpdController extends Controller
     public function show(Opd $opd)
     {
         //
+        $data = $opd->load('peruntukans')->toArray();
+        return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 
     /**
@@ -70,7 +96,17 @@ class OpdController extends Controller
      */
     public function update(UpdateOpdRequest $request, Opd $opd)
     {
-        //
+        try {
+            // ? validasi input menggunakan UpdateOpdRequest
+            $request->validated();
+            // ? update data OPD
+            $opd->update($request->all());
+            // ? berikan respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil mengubah data!', null, []);
+        } catch (\Exception $e) {
+            // ? tangani kesalahan umum
+            return ResponseHelper::jsonResponse(500, 'Gagal mengubah data!', null, []);
+        }
     }
 
     /**
@@ -78,6 +114,12 @@ class OpdController extends Controller
      */
     public function destroy(Opd $opd)
     {
-        //
+        try {
+            $opd->delete();
+
+            return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);
+        } catch (\Throwable $th) {
+            return ResponseHelper::jsonResponse(500, 'Gagal menghapus data!', null, []);
+        }
     }
 }

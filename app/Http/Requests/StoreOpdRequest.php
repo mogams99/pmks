@@ -22,7 +22,9 @@ class StoreOpdRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'peruntukans_id' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
+            // ? tambahkan aturan validasi untuk field lain jika diperlukan
         ];
     }
 }

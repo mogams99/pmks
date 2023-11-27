@@ -34,6 +34,7 @@ Route::middleware(['auth', 'access_check'])->group(function () {
 
     Route::prefix('/master')->group(function () { 
         Route::get('/opd/data', [OpdController::class, 'data'])->name('opd.data');
+        Route::get('/opd/data_peruntukan', [OpdController::class, 'dataPeruntukan'])->name('opd.data_peruntukan');
         Route::resource('/opd', OpdController::class);
     });
 });
