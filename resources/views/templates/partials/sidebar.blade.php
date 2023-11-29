@@ -21,8 +21,8 @@
                 @if ($menu->parent_id == null && $countSubMenus <= 0)
                     <div class="menu-item menu-accordion {{ $url == $currentRoute ? 'hover showing' : '' }}">
                         <!--begin:Menu link-->
-                        <a class="menu-link" href="{{ route($menu->url) }}">
-                            <span class="menu-icon">
+                        <a class="menu-link" href="{{ $menu->url ? route($menu->url) : '#' }}">
+                            <span class="menu-icon"> 
                                 <i class="{{ $menu->icon }} fs-2"></i>
                             </span>
                             <span class="menu-title">{{ $menu->name }}</span>

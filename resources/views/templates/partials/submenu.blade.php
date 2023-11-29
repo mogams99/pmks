@@ -17,7 +17,7 @@
             <div class="menu-item menu-accordion">
                 <!--begin:Menu link-->
                 <a class="menu-link {{ request()->segment(2) == $subMenu->active ? 'active' : '' }}"
-                    href="{{ route($subMenu->url) }}">
+                href="{{ $subMenu->url ? route($subMenu->url) : '#' }}">
                     <span class="menu-bullet">
                         <span class="bullet bullet-dot"></span>
                     </span>
