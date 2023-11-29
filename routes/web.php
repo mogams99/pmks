@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Master\BidangController;
 use App\Http\Controllers\Master\OpdController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,5 +37,8 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::get('/opd/data', [OpdController::class, 'data'])->name('opd.data');
         Route::get('/opd/data_peruntukan', [OpdController::class, 'dataPeruntukan'])->name('opd.data_peruntukan');
         Route::resource('/opd', OpdController::class);
+
+        Route::get('/bidang/data', [BidangController::class, 'data'])->name('bidang.data');
+        Route::resource('/bidang', BidangController::class);
     });
 });
