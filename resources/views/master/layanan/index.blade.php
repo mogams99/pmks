@@ -1,12 +1,12 @@
 @extends('templates.default')
 @php
-$title = 'Master OPD';
+$title = 'Master Layanan';
 $preTitle = null;
 $currentRouteName = Route::currentRouteName();
 @endphp
 
 @section('content')
-@include('master.opd.toolbar')
+@include('master.bidang.toolbar')
 
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <div id="kt_app_content_container" class="app-container container-fluid">
@@ -19,8 +19,9 @@ $currentRouteName = Route::currentRouteName();
                                 <thead>
                                     <tr>
                                         <th scope="col">No.</th>
-                                        <th scope="col">Peruntukan</th>
-                                        <th scope="col">Nama Perangkat Daerah</th>
+                                        <th scope="col">Bidang</th>
+                                        <th scope="col">Nama Layanan</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Aksi</th>
                                     </tr>
                                 </thead>
@@ -35,7 +36,7 @@ $currentRouteName = Route::currentRouteName();
     </div>
 </div>
 
-@include('master.opd.modal')
+@include('master.bidang.modal')
 
 @push('styles')
     <link href="{{ asset('dist/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -49,7 +50,7 @@ $currentRouteName = Route::currentRouteName();
             let table = $('#dt_index').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('opd.data') }}",
+                ajax: "{{ route('layanan.data') }}",
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -58,13 +59,18 @@ $currentRouteName = Route::currentRouteName();
                         className: 'fs-6 text-center',
                     },
                     {
-                        data: 'peruntukans',
-                        name: 'peruntukans',
+                        data: 'bidangs',
+                        name: 'bidangs',
                         className: 'fs-6 text-center',
                     },
                     {
                         data: 'nama',
                         name: 'nama',
+                        className: 'fs-6 text-center',
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
                         className: 'fs-6 text-center',
                     },
                     {
@@ -97,6 +103,6 @@ $currentRouteName = Route::currentRouteName();
         });
     </script>
 
-    @include('master.opd.crud-scripts')
+    @include('master.bidang.crud-scripts')
 @endpush
 @endsection
