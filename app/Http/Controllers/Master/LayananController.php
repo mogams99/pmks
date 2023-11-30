@@ -45,6 +45,7 @@ class LayananController extends Controller
 
     public function dataBidang(Bidang $bdg)
     {
+        dd('dataBidang');
         $data = $bdg->all();
         return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }

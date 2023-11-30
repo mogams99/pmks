@@ -5,7 +5,8 @@
                 <h3 class="modal-title">Modal title</h3>
 
                 <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal"
+                    aria-label="Close">
                     <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                 </div>
                 <!--end::Close-->
@@ -16,28 +17,14 @@
                     @method('POST')
                     @csrf
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nama Bidang</label>
-                        <input type="text" class="form-control" id="nama" name="nama">
+                        <label for="exampleFormControlInput1" class="form-label">Bidang</label>
+                        <select class="form-select" data-control="select2" data-placeholder="- Pilih Bidang -" id="bidangs_id" name="bidangs_id">
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Status</label>
-
-                        <div class="form-check form-check-custom form-check-solid mb-3">
-                            <input class="form-check-input" type="radio" value="true" id="statusAktif" name="status">
-                            <label class="form-check-label" for="statusAktif">
-                                Aktif
-                            </label>
-                        </div>
-
-                        <div class="form-check form-check-custom form-check-solid">
-                            <input class="form-check-input" type="radio" value="false" id="statusTidakAktif" name="status">
-                            <label class="form-check-label" for="statusTidakAktif">
-                                Tidak Aktif
-                            </label>
-                        </div>
+                        <label for="exampleFormControlInput1" class="form-label">Nama Layanan</label>
+                        <input type="text" class="form-control" id="nama" name="nama">
                     </div>
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" onclick="submitForm(this.form)">Save
