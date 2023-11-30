@@ -2,6 +2,7 @@
     var modal = '#kt_modal_1';
 
     function addForm(route, title) {
+        // console.log(route, title, 'Add Form');
         $(modal).modal('show');
         $(`${modal} .modal-title`).text(title);
         $(`${modal} form`)[0].reset();
@@ -9,6 +10,7 @@
         $(`${modal} form [name=_method]`).val('post');
         resetInput(`${modal} form`);
         resetSelect2();
+        getBidangs();
     }
 
     function resetSelect2() {
@@ -53,6 +55,8 @@
 
                 resetInput(`${modal} form`);
                 loopForm(response.data);
+                // console.log(response.data.bidangs_id);
+                getBidangs(response.data.bidangs_id);
             })
             .fail(errors => {
                 var message = 'Data tidak dapat ditampilkan.'
@@ -204,5 +208,41 @@
     }
 
     // ? extend scripts
-    
+    function getBidangs(selectedId = null) {
+        $.ajax({
+            url: "{{ route('layanan.data_bidang') }}",
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var selectElement = $('#bidangs_id');
+                selectElement.empty();
+                console.log(selectedId);
+
+                var defaultOption = $('<option>', {
+                    value: '',
+                    text: '- Pilih Peruntukan -'
+                });
+                selectElement.append(defaultOption);
+
+                $.each(response.data, function(key, value) {
+                    var option = $('<option>', {
+                        value: value.id,
+                        text: value.nama
+                    });
+
+                    // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
+                    if (selectedId !== null && selectedId == value.id) {
+                        option.attr('selected', 'selected');
+                    }
+
+                    selectElement.append(option);
+                });
+
+                selectElement.trigger('change');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error: ' + error);
+            }
+        });
+    }
 </script>

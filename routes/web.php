@@ -34,8 +34,8 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::get('/bidang/data', [BidangController::class, 'data'])->name('bidang.data');
         Route::resource('/bidang', BidangController::class);
 
-        Route::get('/opd/data_bidang', [LayananController::class, 'dataBidang'])->name('layanan.data_bidang');
         Route::get('/layanan/data', [LayananController::class, 'data'])->name('layanan.data');
+        Route::get('/layanan/data_bidang', [LayananController::class, 'dataBidang'])->name('layanan.data_bidang');
         Route::resource('/layanan', LayananController::class);
 
         Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');

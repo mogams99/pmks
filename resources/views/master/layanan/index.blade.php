@@ -6,7 +6,7 @@ $currentRouteName = Route::currentRouteName();
 @endphp
 
 @section('content')
-@include('master.bidang.toolbar')
+@include('master.layanan.toolbar')
 
 <div id="kt_app_content" class="app-content flex-column-fluid">
     <div id="kt_app_content_container" class="app-container container-fluid">
@@ -36,7 +36,7 @@ $currentRouteName = Route::currentRouteName();
     </div>
 </div>
 
-@include('master.bidang.modal')
+@include('master.layanan.modal')
 
 @push('styles')
     <link href="{{ asset('dist/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -103,6 +103,6 @@ $currentRouteName = Route::currentRouteName();
         });
     </script>
 
-    @include('master.bidang.crud-scripts')
+    @include('master.layanan.crud-scripts')
 @endpush
 @endsection
