@@ -32,7 +32,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Master',
                 'icon' => 'bi bi-database-check',
                 'parent_id' => null,
-                'url' => '1',
+                'url' => null,
                 'order' => 2,
                 'status' => true,
                 'active' => 'master',
@@ -44,7 +44,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Transaksi',
                 'icon' => 'bi bi-list-check',
                 'parent_id' => null,
-                'url' => '2',
+                'url' => null,
                 'order' => 3,
                 'status' => true,
                 'active' => 'transaksi',
@@ -56,8 +56,8 @@ class MenuSeeder extends Seeder
                 'name' => 'Manajemen User',
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 2,
-                'url' => '3', // Kolom url diisi dengan null
-                'order' => 3,
+                'url' => null, // Kolom url diisi dengan null
+                'order' => 1,
                 'status' => true,
                 'active' => 'manajemen_user',
                 'created_by' => 1,
@@ -68,8 +68,8 @@ class MenuSeeder extends Seeder
                 'name' => 'User',
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 4,
-                'url' => '4', // Kolom url diisi dengan null
-                'order' => 3,
+                'url' => null, // Kolom url diisi dengan null
+                'order' => 1,
                 'status' => true,
                 'active' => 'user',
                 'created_by' => 1,
@@ -80,8 +80,8 @@ class MenuSeeder extends Seeder
                 'name' => 'Role',
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 4,
-                'url' => '5', // Kolom url diisi dengan null
-                'order' => 3,
+                'url' => null, // Kolom url diisi dengan null
+                'order' => 2,
                 'status' => true,
                 'active' => 'role',
                 'created_by' => 1,
@@ -92,7 +92,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Akses',
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 4,
-                'url' => '6', // Kolom url diisi dengan null
+                'url' => null, // Kolom url diisi dengan null
                 'order' => 3,
                 'status' => true,
                 'active' => 'akses',
@@ -105,9 +105,21 @@ class MenuSeeder extends Seeder
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 2,
                 'url' => 'opd.index', // Kolom url diisi dengan null
-                'order' => 3,
+                'order' => 2,
                 'status' => true,
                 'active' => 'opd',
+                'created_by' => 1,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'id' => 9,
+                'name' => 'Bidang',
+                'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 2,
+                'url' => 'bidang.index', // Kolom url diisi dengan null
+                'order' => 3,
+                'status' => true,
+                'active' => 'bidang',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
