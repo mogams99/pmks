@@ -8,6 +8,7 @@ use App\Http\Requests\StoreOpdRequest;
 use App\Http\Requests\UpdateOpdRequest;
 use App\Models\Opd;
 use App\Models\Peruntukan;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class OpdController extends Controller
@@ -22,7 +23,7 @@ class OpdController extends Controller
 
     public function data(Opd $opd)
     {
-        $data = $opd->select('id', 'peruntukans_id', 'nama')->with('peruntukans')->get();
+        $data = $opd->select('id', 'peruntukans_id', 'nama', 'status')->with('peruntukans')->get();
 
         return DataTables::of($data)
             ->addIndexColumn()
@@ -32,10 +33,13 @@ class OpdController extends Controller
             ->addColumn('peruntukans', function ($data) {
                 return ucwords($data->peruntukans->nama);
             })
+            ->addColumn('status', function ($data) {
+                return $data->status ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak Aktif</span>';
+            })
             ->addColumn('action', function ($data) {
                 return view('master.opd.action', compact('data'));
             })
-            ->rawColumns(['action'])
+            ->rawColumns(['status', 'action'])
             ->make(true);
     }
 
@@ -59,16 +63,16 @@ class OpdController extends Controller
     public function store(StoreOpdRequest $request)
     {
         try {
-            // Membuat dan menyimpan record ke database
+            $request->merge(['created_by' => Auth::user()->id]);
+            // ? membuat dan menyimpan record ke database
             Opd::create($request->all());
-
-            // Memberikan respons berhasil
+            // ? memberikan respons berhasil
             return ResponseHelper::jsonResponse(201, 'Berhasil menyimpan data!', null, []);
         } catch (QueryException $e) {
-            // Menangani kesalahan query
+            // ? menangani kesalahan query
             return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan saat menyimpan data.', null, []);
         } catch (\Exception $e) {
-            // Menangani kesalahan umum
+            // ? menangani kesalahan umum
             return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan.', null, []);
         }
     }
@@ -98,6 +102,8 @@ class OpdController extends Controller
         try {
             // ? validasi input menggunakan UpdateOpdRequest
             $request->validated();
+            // ? melakukan merge updated_by ke $request
+            $request->merge(['updated_by' => Auth::user()->id]);
             // ? update data OPD
             $opd->update($request->all());
             // ? berikan respons berhasil
@@ -114,6 +120,8 @@ class OpdController extends Controller
     public function destroy(Opd $opd)
     {
         try {
+            $opd->deleted_by = Auth::user()->id;
+            $opd->save();
             $opd->delete();
 
             return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);

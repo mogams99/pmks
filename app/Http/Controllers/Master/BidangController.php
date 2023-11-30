@@ -109,6 +109,8 @@ class BidangController extends Controller
     public function destroy(Bidang $bidang)
     {
         try {
+            $bidang->deleted_by = Auth::user()->id;
+            $bidang->save();
             $bidang->delete();
 
             return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);

@@ -21,6 +21,7 @@
                                             <th scope="col">No.</th>
                                             <th scope="col">Peruntukan</th>
                                             <th scope="col">Nama Perangkat Daerah</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -95,6 +96,11 @@
                         {
                             data: 'nama',
                             name: 'nama',
+                            className: 'fs-6 text-center',
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
                             className: 'fs-6 text-center',
                         },
                         {

@@ -8,6 +8,7 @@ use App\Http\Requests\StoreLayananRequest;
 use App\Http\Requests\UpdateLayananRequest;
 use App\Models\Bidang;
 use App\Models\Layanan;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 
 class LayananController extends Controller
@@ -63,9 +64,9 @@ class LayananController extends Controller
     public function store(StoreLayananRequest $request)
     {
         try {
+            $request->merge(['created_by' => Auth::user()->id]);
             // ? membuat dan menyimpan record ke database
             Layanan::create($request->all());
-
             // ? memberikan respons berhasil
             return ResponseHelper::jsonResponse(201, 'Berhasil menyimpan data!', null, []);
         } catch (QueryException $e) {
@@ -102,6 +103,8 @@ class LayananController extends Controller
         try {
             // ? validasi input menggunakan UpdateOpdRequest
             $request->validated();
+            // ? melakukan merge updated_by ke $request
+            $request->merge(['updated_by' => Auth::user()->id]);
             // ? update data OPD
             $layanan->update($request->all());
             // ? berikan respons berhasil
@@ -118,6 +121,8 @@ class LayananController extends Controller
     public function destroy(Layanan $layanan)
     {
         try {
+            $layanan->deleted_by = Auth::user()->id;
+            $layanan->save();
             $layanan->delete();
 
             return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);
