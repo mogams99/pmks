@@ -27,9 +27,19 @@ class RoleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function data()
     {
-        //
+        $data = Role::getRole();
+        return datatables($data)
+            ->addIndexColumn()
+            ->editColumn('status', function ($data) {
+                return $data->status ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak Aktif</span>';
+            })
+            ->addColumn('action', function ($data) {
+                return view('master.role.action', compact('data'));
+            })
+            ->rawColumns(['action', 'status'])
+            ->make(true);
     }
 
     /**
