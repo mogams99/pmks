@@ -78,7 +78,6 @@ class OpdController extends Controller
      */
     public function show(Opd $opd)
     {
-        //
         $data = $opd->load('peruntukans')->toArray();
         return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }

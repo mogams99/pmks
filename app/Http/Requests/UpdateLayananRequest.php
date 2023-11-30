@@ -11,7 +11,7 @@ class UpdateLayananRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class UpdateLayananRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'bidangs_id' => 'required',
+            'nama' => 'required|string|max:255',
+            // ? tambahkan aturan validasi untuk field lain jika diperlukan
         ];
     }
 }

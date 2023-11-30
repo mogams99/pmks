@@ -220,7 +220,7 @@
 
                 var defaultOption = $('<option>', {
                     value: '',
-                    text: '- Pilih Peruntukan -'
+                    text: '- Pilih Bidang -'
                 });
                 selectElement.append(defaultOption);
 

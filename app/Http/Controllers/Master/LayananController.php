@@ -37,7 +37,7 @@ class LayananController extends Controller
                 return $data->status ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak Aktif</span>';
             })
             ->addColumn('action', function ($data) {
-                return view('master.bidang.action', compact('data'));
+                return view('master.layanan.action', compact('data'));
             })
             ->rawColumns([ 'status', 'action'])
             ->make(true);
@@ -45,7 +45,6 @@ class LayananController extends Controller
 
     public function dataBidang(Bidang $bdg)
     {
-        dd('dataBidang');
         $data = $bdg->all();
         return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
@@ -63,7 +62,19 @@ class LayananController extends Controller
      */
     public function store(StoreLayananRequest $request)
     {
-        //
+        try {
+            // ? membuat dan menyimpan record ke database
+            Layanan::create($request->all());
+
+            // ? memberikan respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil menyimpan data!', null, []);
+        } catch (QueryException $e) {
+            // ? menangani kesalahan query
+            return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan saat menyimpan data.', null, []);
+        } catch (\Exception $e) {
+            // ? menangani kesalahan umum
+            return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan.', null, []);
+        }
     }
 
     /**
@@ -71,7 +82,8 @@ class LayananController extends Controller
      */
     public function show(Layanan $layanan)
     {
-        //
+        $data = $layanan->load('bidangs')->toArray();
+        return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 
     /**
@@ -87,7 +99,17 @@ class LayananController extends Controller
      */
     public function update(UpdateLayananRequest $request, Layanan $layanan)
     {
-        //
+        try {
+            // ? validasi input menggunakan UpdateOpdRequest
+            $request->validated();
+            // ? update data OPD
+            $layanan->update($request->all());
+            // ? berikan respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil mengubah data!', null, []);
+        } catch (\Exception $e) {
+            // ? tangani kesalahan umum
+            return ResponseHelper::jsonResponse(500, 'Gagal mengubah data!', null, []);
+        }
     }
 
     /**
@@ -95,6 +117,12 @@ class LayananController extends Controller
      */
     public function destroy(Layanan $layanan)
     {
-        //
+        try {
+            $layanan->delete();
+
+            return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);
+        } catch (\Throwable $th) {
+            return ResponseHelper::jsonResponse(500, 'Gagal menghapus data!', null, []);
+        }
     }
 }
