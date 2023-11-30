@@ -6,6 +6,7 @@ use App\Http\Controllers\Master\BidangController;
 use App\Http\Controllers\Master\LayananController;
 use App\Http\Controllers\Master\OpdController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Master\RoleController;
 
 /*
 |--------------------------------------------------------------------------
