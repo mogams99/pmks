@@ -39,6 +39,6 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::resource('/layanan', LayananController::class);
 
         Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
-        Route::resource('/roles', RoleController::class);
+        Route::resource('/roles', RoleController::class)->except('create, edit');
     });
 });

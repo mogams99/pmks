@@ -24,4 +24,10 @@ class Role extends Model
 
         return $roles;
     }
+
+    static public function getRole()
+    {
+        $data = Role::orderBy('name', 'asc');
+        return $data;
+    }
 }
