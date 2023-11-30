@@ -18,7 +18,6 @@ class OpdSeeder extends Seeder
         $peruntukans = Peruntukan::select('id', 'nama')->get();
 
         foreach ($peruntukans as $peruntukan) {
-            // dd($peruntukan->nama);
             foreach ($raw as $opdName) {
                 if (strpos($opdName, $peruntukan->nama) !== false) {
                     Opd::create([
