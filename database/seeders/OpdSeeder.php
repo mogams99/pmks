@@ -14,11 +14,11 @@ class OpdSeeder extends Seeder
      */
     public function run(): void
     {
-        $raw = ['Dinas Perlindungan Perempuan dan Anak', 'Dinas Kesehatan', 'Dinas Sosial', 'Dinas Pendidikan', 'Badan Narkotika Nasional', 'RSJ Menur', 'RS. Soewandhi'];
+        $arrayOpd = ['Dinas Perlindungan Perempuan dan Anak', 'Dinas Kesehatan', 'Dinas Sosial', 'Dinas Pendidikan', 'Badan Narkotika Nasional', 'RSJ Menur', 'RS. Soewandhi'];
         $peruntukans = Peruntukan::select('id', 'nama')->get();
 
         foreach ($peruntukans as $peruntukan) {
-            foreach ($raw as $opdName) {
+            foreach ($arrayOpd as $opdName) {
                 if (strpos($opdName, $peruntukan->nama) !== false) {
                     Opd::create([
                         'nama' => $opdName,

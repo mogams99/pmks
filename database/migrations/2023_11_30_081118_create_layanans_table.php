@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('opds', function (Blueprint $table) {
+        Schema::create('layanans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('peruntukans_id');
-            $table->foreign('peruntukans_id')->references('id')->on('peruntukans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('bidangs_id');
+            $table->foreign('bidangs_id')->references('id')->on('bidangs')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama')->nullable()->default(null);
             $table->boolean('status')->nullable()->default(true);
             $table->unsignedBigInteger('created_by')->nullable()->default(null);
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('opds');
+        Schema::dropIfExists('layanans');
     }
 };
