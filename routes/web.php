@@ -25,7 +25,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'access_check'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard.index');
 
-    Route::prefix('/master')->group(function () { 
+    Route::prefix('/master')->group(function () {
         Route::get('/opd/data', [OpdController::class, 'data'])->name('opd.data');
         Route::get('/opd/data_peruntukan', [OpdController::class, 'dataPeruntukan'])->name('opd.data_peruntukan');
         Route::resource('/opd', OpdController::class);
@@ -36,5 +36,8 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::get('/opd/data_bidang', [LayananController::class, 'dataBidang'])->name('layanan.data_bidang');
         Route::get('/layanan/data', [LayananController::class, 'data'])->name('layanan.data');
         Route::resource('/layanan', LayananController::class);
+
+        Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
+        Route::resource('/roles', RoleController::class);
     });
 });
