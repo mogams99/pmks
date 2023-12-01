@@ -80,7 +80,7 @@ class MenuSeeder extends Seeder
                 'name' => 'Role',
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 4,
-                'url' => null, // Kolom url diisi dengan null
+                'url' => 'roles.index', // Kolom url diisi dengan null
                 'order' => 2,
                 'status' => true,
                 'active' => 'role',
@@ -144,6 +144,18 @@ class MenuSeeder extends Seeder
                 'order' => 5,
                 'status' => true,
                 'active' => 'tipe_jawaban',
+                'created_by' => 1,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'id' => 12,
+                'name' => 'Periodik',
+                'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 2,
+                'url' => 'periodik.index', // Kolom url diisi dengan null
+                'order' => 6,
+                'status' => true,
+                'active' => 'periodik',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
