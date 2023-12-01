@@ -135,6 +135,18 @@ class MenuSeeder extends Seeder
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
+            [
+                'id' => 11,
+                'name' => 'Tipe Jawaban',
+                'icon' => null, // Kolom icon diisi dengan null
+                'parent_id' => 2,
+                'url' => 'tipe_jawaban.index', // Kolom url diisi dengan null
+                'order' => 5,
+                'status' => true,
+                'active' => 'tipe_jawaban',
+                'created_by' => 1,
+                'created_at' => Carbon::now(),
+            ],
         ];
 
         Menu::insert($data);
