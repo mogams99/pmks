@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\BidangController;
 use App\Http\Controllers\Master\LayananController;
 use App\Http\Controllers\Master\OpdController;
+use App\Http\Controllers\Master\PeriodikController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Master\RoleController;
 use App\Http\Controllers\Master\TipeJawabanController;
@@ -44,5 +45,8 @@ Route::middleware(['auth', 'access_check'])->group(function () {
 
         Route::get('/tipe_jawaban/data', [TipeJawabanController::class, 'data'])->name('tipe_jawaban.data');
         Route::resource('/tipe_jawaban', TipeJawabanController::class);
+
+        // Route::get('/periodik/data', [PeriodikController::class, 'data'])->name('periodik.data');
+        Route::resource('/periodik', PeriodikController::class);
     });
 });
