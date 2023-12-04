@@ -102,6 +102,7 @@ class PeriodikController extends Controller
             $request->validated();
             // ? menggunakan helper DateHelper untuk memisahkan rentang tanggal
             $dateData = DateHelper::parseDateRange($request->tgl);
+            dd($dateData);
             // ! penyesuaian struktur request
             $request->offsetUnset('tgl');
             $request->merge($dateData);
