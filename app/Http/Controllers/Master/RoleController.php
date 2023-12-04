@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Master;
 
-use App\Http\Controllers\Controller;
 use App\Models\Role;
+use App\Helpers\ResponseHelper;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 
@@ -47,7 +49,18 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        try {
+            $request->merge(['created_by' => Auth::user()->id]);
+            Role::create($request->all());
+            // ? mengirim respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil menyimpan data!', null, []);
+        } catch (QueryException $e) {
+            // ? menangani kesalahan query
+            return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan saat menyimpan data.', null, []);
+        } catch (\Exception $e) {
+            // ? menangani kesalahan umum
+            return ResponseHelper::jsonResponse(500, 'Terjadi kesalahan.', null, []);
+        }
     }
 
     /**
@@ -55,7 +68,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        $data = $role->toArray();
+        return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 
     /**
@@ -71,7 +85,19 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        try {
+            // ? melakukan validasi input dengan UpdateBidangRequest
+            $request->validated();
+            // ? melakukan merge updated_by ke $request
+            $request->merge(['updated_by' => Auth::user()->id]);
+            // ? melakukan update data Bidang
+            $role->update($request->all());
+            // ? memberikan respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil mengubah data!', null, []);
+        } catch (\Exception $e) {
+            // ? memberikan respons gagal
+            return ResponseHelper::jsonResponse(500, 'Gagal mengubah data!', null, []);
+        }
     }
 
     /**
@@ -79,6 +105,12 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        try {
+            $role->delete();
+
+            return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);
+        } catch (\Throwable $th) {
+            return ResponseHelper::jsonResponse(500, 'Gagal menghapus data!', null, []);
+        }
     }
 }
