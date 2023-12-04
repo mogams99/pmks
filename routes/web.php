@@ -9,6 +9,7 @@ use App\Http\Controllers\Master\PeriodikController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Master\RoleController;
 use App\Http\Controllers\Master\TipeJawabanController;
+use App\Http\Controllers\Master\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,9 @@ Route::middleware(['auth', 'access_check'])->group(function () {
 
         Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
         Route::resource('/roles', RoleController::class)->except('create, edit');
+
+        Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
+        Route::resource('/user', UserController::class)->except('create, edit');
 
         Route::get('/tipe_jawaban/data', [TipeJawabanController::class, 'data'])->name('tipe_jawaban.data');
         Route::resource('/tipe_jawaban', TipeJawabanController::class);
