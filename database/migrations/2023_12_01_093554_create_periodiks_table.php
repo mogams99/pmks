@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('periodiks', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->nullable()->default(null);
-            $table->timestamp('tgl_mulai')->nullable();
-            $table->timestamp('tgl_selesai')->nullable();
+            $table->date('tgl_mulai')->nullable();
+            $table->date('tgl_selesai')->nullable();
             $table->boolean('status')->nullable()->default(true);
             $table->unsignedBigInteger('created_by')->nullable()->default(null);
             $table->unsignedBigInteger('updated_by')->nullable()->default(null);

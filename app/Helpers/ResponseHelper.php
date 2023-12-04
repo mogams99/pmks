@@ -1,9 +1,6 @@
 <?php 
-// app/Helpers/ResponseHelper.php
 
 namespace App\Helpers;
-
-use Illuminate\Http\JsonResponse;
 
 class ResponseHelper
 {
