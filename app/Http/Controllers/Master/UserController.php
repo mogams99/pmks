@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,15 +15,32 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $url = 'user.index';
+        $permision = Role::getAkses($url);
+        if ($permision) {
+            $data['akses'] = Role::getAkses($url);
+            $data['getRole'] = User::getRole();
+            return view('master.user.index', $data);
+        }
+        return view('error.403');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function data()
     {
-        //
+        $data = User::getRole();
+        return datatables($data)
+            ->addIndexColumn()
+            ->editColumn('status', function ($data) {
+                return $data->status ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak Aktif</span>';
+            })
+            ->addColumn('action', function ($data) {
+                return view('master.user.action', compact('data'));
+            })
+            ->rawColumns(['action', 'status'])
+            ->make(true);
     }
 
     /**
