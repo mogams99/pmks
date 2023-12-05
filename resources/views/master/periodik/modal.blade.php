@@ -54,10 +54,6 @@
 
 @push('scripts')
 <script>
-    $("#tgl").daterangepicker({
-        locale: {
-            format: 'd/M/Y' // Format yang diinginkan, misalnya 'YYYY-MM-DD'
-        }
-    });
+    $("#tgl").daterangepicker();
 </script>
 @endpush
