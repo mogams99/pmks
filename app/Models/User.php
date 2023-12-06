@@ -57,7 +57,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'roles_id', 'id');
     }
 
-    static public function getRole()
+    static public function getUser()
     {
         $data = User::leftJoin('roles', 'users.roles_id', 'roles.id')
             ->get(['users.*', 'roles.name']);

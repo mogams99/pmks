@@ -45,6 +45,7 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::resource('/roles', RoleController::class)->except('create, edit');
 
         Route::get('/user/data', [UserController::class, 'data'])->name('user.data');
+        Route::get('/user/data_role', [UserController::class, 'data_role'])->name('user.data_role');
         Route::resource('/user', UserController::class)->except('create, edit');
 
         Route::get('/tipe_jawaban/data', [TipeJawabanController::class, 'data'])->name('tipe_jawaban.data');

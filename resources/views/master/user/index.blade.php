@@ -141,6 +141,6 @@
         </script>
         <!--End : Datatable Roles-->
 
-        @include('master.role.crud-scripts')
+        @include('master.user.crud-scripts')
     @endpush
 @endsection
