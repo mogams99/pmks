@@ -19,7 +19,7 @@
             </div>
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 @if ($akses->insert == 't')
-                    <button onclick="addForm(`{{ route('user.store') }}`, 'Tambah Role')"
+                    <button onclick="addForm(`{{ route('user.store') }}`, 'Tambah User')"
                         class="btn btn-flex btn-primary h-40px fs-7 fw-bold" data-bs-toggle="modal"
                         data-bs-toggle="modal" data-bs-target="#kt_modal_1">Tambah Data</button>
                 @endif

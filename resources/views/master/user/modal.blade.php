@@ -19,13 +19,23 @@
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Role</label>
                         <select class="form-select" data-control="select2" data-placeholder="- Pilih Role -"
-                            id="role_id" name="role_id">
+                            id="role_id" name="roles_id">
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nama Role</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password">
                     </div>
 
                     <div class="modal-footer">
