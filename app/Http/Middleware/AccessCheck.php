@@ -19,8 +19,7 @@ class AccessCheck
         $user = auth()->user();
         $role_name = $user->role->name;
         $role_id = $user->role->id;
-
-        /* jika role_name yang dipunya user adalah admin maka akan diarahkan ke halaman admin */
+        //  ! jika role_name yang dipunya user adalah admin maka akan diarahkan ke halaman admin
         if ($role_name <> '' && $user->status == true) {
             $raw_access = new Access();
             $access = $raw_access->with(['menu'])->where('roles_id', $role_id)->get();
@@ -29,7 +28,6 @@ class AccessCheck
         } else {
             // ? logout auth contains user
             auth()->logout();
-            
             return redirect()->route('login')->with('error', 'Anda tidak memiliki akses ke halaman tersebut');
         }   
         return $next($request);

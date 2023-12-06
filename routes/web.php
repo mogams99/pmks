@@ -6,6 +6,7 @@ use App\Http\Controllers\Master\BidangController;
 use App\Http\Controllers\Master\LayananController;
 use App\Http\Controllers\Master\OpdController;
 use App\Http\Controllers\Master\PeriodikController;
+use App\Http\Controllers\Master\PertanyaanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Master\RoleController;
 use App\Http\Controllers\Master\TipeJawabanController;
@@ -53,5 +54,7 @@ Route::middleware(['auth', 'access_check'])->group(function () {
 
         Route::get('/periodik/data', [PeriodikController::class, 'data'])->name('periodik.data');
         Route::resource('/periodik', PeriodikController::class);
+
+        Route::resource('/pertanyaan', PertanyaanController::class);
     });
 });
