@@ -25,6 +25,9 @@ class AccessesSeeder extends Seeder
                 'menus_id' => $value->id,
                 'roles_id' => $role->id,
                 'select' => 1,
+                'insert' => 1,
+                'update' => 1,
+                'delete' => 1,
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ];
