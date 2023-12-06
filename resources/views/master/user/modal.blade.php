@@ -17,9 +17,17 @@
                     @csrf
 
                     <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Role</label>
+                        <select class="form-select" data-control="select2" data-placeholder="- Pilih Role -"
+                            id="role_id" name="role_id">
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Nama Role</label>
                         <input type="text" class="form-control" id="name" name="name">
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" onclick="submitForm(this.form)">Save

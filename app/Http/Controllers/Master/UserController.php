@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Master;
 
+use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
@@ -19,7 +20,7 @@ class UserController extends Controller
         $permision = Role::getAkses($url);
         if ($permision) {
             $data['akses'] = Role::getAkses($url);
-            $data['getRole'] = User::getRole();
+            $data['getRole'] = User::getUser();
             return view('master.user.index', $data);
         }
         return view('error.403');
@@ -30,7 +31,7 @@ class UserController extends Controller
      */
     public function data()
     {
-        $data = User::getRole();
+        $data = User::getUser();
         return datatables($data)
             ->addIndexColumn()
             ->editColumn('status', function ($data) {
@@ -41,6 +42,12 @@ class UserController extends Controller
             })
             ->rawColumns(['action', 'status'])
             ->make(true);
+    }
+
+    public function data_role()
+    {
+        $data = Role::all();
+        return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 
     /**

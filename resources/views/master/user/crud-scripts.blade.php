@@ -10,6 +10,7 @@
         $(`${modal} form [name=_method]`).val('post');
         resetInput(`${modal} form`);
         resetSelect2();
+        getRoleData();
     }
 
     function resetSelect2() {
@@ -55,6 +56,7 @@
                 resetInput(`${modal} form`);
                 loopForm(response.data);
                 // console.log(response.data.peruntukans_id);
+                getRoleData(response.data.peruntukans_id);
             })
             .fail(errors => {
                 var message = 'Data tidak dapat ditampilkan.'
@@ -204,6 +206,46 @@
             text: message,
         });
     }
-
-    // ? extend scripts
 </script>
+
+<!--Fungsi untuk selected role-->
+<script>
+    function getRoleData(selectedId = null) {
+        $.ajax({
+            url: "{{ route('user.data_role') }}",
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                console.log(response);
+                var selectElement = $('#role_id');
+                selectElement.empty();
+                console.log(selectedId);
+
+                var defaultOption = $('<option>', {
+                    value: '',
+                    text: '-- Pilih Role --'
+                });
+                selectElement.append(defaultOption);
+
+                $.each(response.data, function(key, value) {
+                    var option = $('<option>', {
+                        value: value.id,
+                        text: value.name
+                    });
+
+                    // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
+                    if (selectedId !== null && selectedId == value.id) {
+                        option.attr('selected', 'selected');
+                    }
+
+                    selectElement.append(option);
+                });
+                selectElement.trigger('change');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error: ' + error);
+            }
+        })
+    }
+</script>
+<!--End : Fungsi untuk selected role-->
