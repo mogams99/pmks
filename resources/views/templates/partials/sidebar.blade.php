@@ -13,10 +13,15 @@
             @foreach ($access as $key => $value)
                 @php
                     $menu = $value->menu;
-                    $subMenus = $menu->sub_menus()->get();
-                    $countSubMenus = $subMenus->count();
-                    $url = $menu->url;
-                    $currentRoute = Route::currentRouteName();
+                    if ($menu) {
+                        $subMenus = $menu->sub_menus;
+                        $countSubMenus = $subMenus->count();
+                        $url = $menu->url;
+                        $currentRoute = Route::currentRouteName();
+                    } else {
+                        // Lakukan sesuatu jika $menu adalah null
+                        continue; // Skip iterasi ke iterasi berikutnya
+                    }
                 @endphp
                 @if ($menu->parent_id == null && $countSubMenus <= 0)
                     <div class="menu-item menu-accordion {{ $url == $currentRoute ? 'hover showing' : '' }}">
