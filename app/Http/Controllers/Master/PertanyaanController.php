@@ -16,6 +16,27 @@ class PertanyaanController extends Controller
     public function index()
     {
         //
+        return view('master.pertanyaan.index');
+    }
+
+    public function data(Pertanyaan $pertanyaan)
+    {
+        $data = $pertanyaan->select('id', 'tipe_jawabans_id', 'layanans_id', 'nama', 'status')->get();
+        dd($data);
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->editColumn('nama', function ($data) {
+                return ucwords($data->nama);
+            })
+            ->addColumn('status', function ($data) {
+                return $data->status ? '<span class="badge badge-success">Aktif</span>' : '<span class="badge badge-danger">Tidak Aktif</span>';
+            })
+            ->addColumn('action', function ($data) {
+                return view('master.pertanyaan.action', compact('data'));
+            })
+            ->rawColumns([ 'status', 'action'])
+            ->make(true);
     }
 
     /**
