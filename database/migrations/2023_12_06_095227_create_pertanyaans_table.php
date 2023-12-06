@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('tipe_jawabans_id')->references('id')->on('tipe_jawabans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('layanans_id')->references('id')->on('layanans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama')->nullable()->default(null);
+            $table->boolean('status')->nullable()->default(true);
             $table->unsignedBigInteger('created_by')->nullable()->default(null);
             $table->unsignedBigInteger('updated_by')->nullable()->default(null);
             $table->unsignedBigInteger('deleted_by')->nullable()->default(null);

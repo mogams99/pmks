@@ -65,13 +65,13 @@ class MenuSeeder extends Seeder
             ],
             [
                 'id' => 5,
-                'name' => 'Role',
+                'name' => 'Roles',
                 'icon' => null, // Kolom icon diisi dengan null
                 'parent_id' => 2,
                 'url' => 'roles.index', // Kolom url diisi dengan null
                 'order' => 2,
                 'status' => true,
-                'active' => 'role',
+                'active' => 'roles',
                 'created_by' => 1,
                 'created_at' => Carbon::now(),
             ],
