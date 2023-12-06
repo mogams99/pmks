@@ -2,7 +2,7 @@
     var modal = '#kt_modal_1';
 
     function addForm(route, title) {
-        // console.log(route, title, 'Add Form');
+        console.log(route, title, 'Add Form');
         $(modal).modal('show');
         $(`${modal} .modal-title`).text(title);
         $(`${modal} form`)[0].reset();
@@ -56,7 +56,7 @@
                 resetInput(`${modal} form`);
                 loopForm(response.data);
                 // console.log(response.data.peruntukans_id);
-                getRoleData(response.data.peruntukans_id);
+                getRoleData(response.data.roles_id);
             })
             .fail(errors => {
                 var message = 'Data tidak dapat ditampilkan.'
