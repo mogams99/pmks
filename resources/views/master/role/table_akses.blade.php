@@ -19,10 +19,13 @@
                             <tr>
                                 <th scope="col" class="text-center" width="10%">No.</th>
                                 <th scope="col">Menu</th>
-                                <th scope="col" class="text-center" width="10%">Select</th>
-                                <th scope="col" class="text-center" width="10%">Create</th>
-                                <th scope="col" class="text-center" width="10%">Update</th>
-                                <th scope="col" class="text-center" width="10%">Delete</th>
+                                <th scope="col" class="text-center" width="8%">Select</th>
+                                <th scope="col" class="text-center" width="8%">Create</th>
+                                <th scope="col" class="text-center" width="8%">Update</th>
+                                <th scope="col" class="text-center" width="8%">Delete</th>
+                                <th scope="col" class="text-center" width="8%">Print</th>
+                                <th scope="col" class="text-center" width="8%">Export</th>
+                                <th scope="col" class="text-center" width="8%">Import</th>
                                 {{-- @if ($akses->update == 't' || $akses->delete == 't')
                                     <th scope="col" class="text-center" width="10%">Aksi</th>
                                 @endif --}}
