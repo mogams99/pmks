@@ -121,10 +121,46 @@ class RoleController extends Controller
         $data = Role::getTableAkses($id);
         return datatables($data)
             ->addIndexColumn()
+            ->editColumn('select', function ($data) {
+                $checked = $data->select ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id) . '" data-kolom="select" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('insert', function ($data) {
+                $checked = $data->insert ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id) . '" data-kolom="insert" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('update', function ($data) {
+                $checked = $data->update ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id) . '" data-kolom="update" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('delete', function ($data) {
+                $checked = $data->delete ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id) . '" data-kolom="delete" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
             ->addColumn('action', function ($data) {
                 return view('master.role.action', compact('data'));
             })
-            ->rawColumns(['action',])
+            ->rawColumns(['action', 'select', 'insert', 'update', 'delete'])
             ->make(true);
     }
     // End : Funsi untuk konfigurasi akses role
