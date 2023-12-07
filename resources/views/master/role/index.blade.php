@@ -226,6 +226,7 @@
                             /* load dist/assets/img/icons/logo-sby.svg inside processing set div for img loading */
                             processing: "<div class='d-flex justify-content-center align-items-center'><img src='{{ asset('dist/assets/media/logos/favicon.ico') }}' class='img-fluid' style='width: 100px; height: 100px;'></div>",
                         },
+                        destroy: true,
                     });
 
                     window.table = table;
