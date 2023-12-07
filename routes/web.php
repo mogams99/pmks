@@ -43,6 +43,7 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::resource('/layanan', LayananController::class);
 
         Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
+        Route::get('/roles/akses/data/{id}', [RoleController::class, 'akses'])->name('roles.akses');
         Route::resource('/roles', RoleController::class)->except('create, edit');
 
         Route::get('/user/data', [UserController::class, 'data'])->name('user.data');

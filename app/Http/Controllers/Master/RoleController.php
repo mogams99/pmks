@@ -113,4 +113,19 @@ class RoleController extends Controller
             return ResponseHelper::jsonResponse(500, 'Gagal menghapus data!', null, []);
         }
     }
+
+    // Funsi untuk konfigurasi akses role
+    public function akses($id)
+    {
+        $id = decrypt($id);
+        $data = Role::getTableAkses($id);
+        return datatables($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($data) {
+                return view('master.role.action', compact('data'));
+            })
+            ->rawColumns(['action',])
+            ->make(true);
+    }
+    // End : Funsi untuk konfigurasi akses role
 }

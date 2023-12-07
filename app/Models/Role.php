@@ -31,4 +31,15 @@ class Role extends Model
         $data = Role::orderBy('name', 'asc');
         return $data;
     }
+
+    static public function getTableAkses($id)
+    {
+        $result = Role::select('menus.name as menu', 'roles.name as role', 'accesses.*')
+            ->leftJoin('accesses', 'roles.id', '=', 'accesses.roles_id')
+            ->leftJoin('menus', 'menus.id', '=', 'accesses.menus_id')
+            ->where('roles_id', $id)
+            ->get();
+
+        return $result;
+    }
 }
