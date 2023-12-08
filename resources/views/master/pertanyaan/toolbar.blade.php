@@ -19,7 +19,7 @@
             </div>
             <div class="d-flex align-items-center gap-2 gap-lg-3">
                 <!-- <a href="#" class="btn btn-flex btn-outline btn-color-gray-700 btn-active-color-primary bg-body h-40px fs-7 fw-bold" data-bs-toggle="modal" data-bs-target="#kt_modal_1">Tambah Data</a> -->
-                <button onclick="addForm(`{{ route('bidang.store') }}`, 'Tambah Bidang')"
+                <button onclick="addForm(`{{ route('pertanyaan.store') }}`, 'Tambah Pertanyaan')"
                     class="btn btn-flex btn-primary h-40px fs-7 fw-bold" data-bs-toggle="modal" data-bs-toggle="modal"
                     data-bs-target="#kt_modal_1">Tambah Data</button>
             </div>

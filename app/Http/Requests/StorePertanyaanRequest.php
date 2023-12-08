@@ -11,7 +11,7 @@ class StorePertanyaanRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StorePertanyaanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tipe_jawabans_id' => 'required',
+            'layanans_id' => 'required',
+            'nama' => 'required|string|max:255',
+            'status' => 'required',
+            // ? tambahkan aturan validasi untuk field lain jika diperlukan
         ];
     }
 }

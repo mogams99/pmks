@@ -57,6 +57,8 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::resource('/periodik', PeriodikController::class);
 
         Route::get('/pertanyaan/data', [PertanyaanController::class, 'data'])->name('pertanyaan.data');
+        Route::get('/pertanyaan/data_layanan/{param}', [PertanyaanController::class, 'dataLayanan'])->name('pertanyaan.data_layanan');
+        Route::get('/pertanyaan/data_tipe_jawaban', [PertanyaanController::class, 'dataTipeJawaban'])->name('pertanyaan.data_tipe_jawaban');
         Route::resource('/pertanyaan', PertanyaanController::class);
     });
 });

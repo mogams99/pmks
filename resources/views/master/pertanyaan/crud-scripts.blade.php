@@ -1,5 +1,6 @@
 <script>
     var modal = '#kt_modal_1';
+    let tempSelectedId = null;
 
     function addForm(route, title) {
         // console.log(route, title, 'Add Form');
@@ -10,6 +11,8 @@
         $(`${modal} form [name=_method]`).val('post');
         resetInput(`${modal} form`);
         resetSelect2();
+        dataBidangs();
+        dataTipeJawabans();
     }
 
     function resetSelect2() {
@@ -54,6 +57,9 @@
 
                 resetInput(`${modal} form`);
                 loopForm(response.data);
+                tempSelectedId = response.data.layanans_id;
+                dataBidangs(response.data.bidangs_id);
+                dataTipeJawabans(response.data.tipe_jawabans_id);
             })
             .fail(errors => {
                 var message = 'Data tidak dapat ditampilkan.'
@@ -205,5 +211,123 @@
     }
 
     // ? extend scripts
-    
+    function dataBidangs(selectedId = null) {
+        $.ajax({
+            url: "{{ route('layanan.data_bidang') }}",
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var selectElement = $('#bidangs_id');
+                selectElement.empty();
+
+                var defaultOption = $('<option>', {
+                    value: '',
+                    text: '- Pilih Bidang -'
+                });
+                selectElement.append(defaultOption);
+
+                $.each(response.data, function(key, value) {
+                    var option = $('<option>', {
+                        value: value.id,
+                        text: value.nama
+                    });
+
+                    // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
+                    if (selectedId !== null && selectedId == value.id) {
+                        option.attr('selected', 'selected');
+                    }
+
+                    selectElement.append(option);
+                });
+
+                selectElement.trigger('change');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error: ' + error);
+            }
+        });
+    }
+
+    $("#bidangs_id").change(function() {
+        const bidangId = $(this).val();
+
+        if (bidangId !== '') {
+            let url = '{{ route("pertanyaan.data_layanan", ["param" => ":bidangId"]) }}';
+            url = url.replace(":bidangId", bidangId);
+
+            $.ajax({
+                url,
+                type: "GET",
+                success: function(response) {
+
+                    var selectElement = $('#layanans_id');
+                    selectElement.attr('disabled', false);
+                    selectElement.empty();
+
+                    var defaultOption = $('<option>', {
+                        value: '',
+                        text: '- Pilih Layanan -'
+                    });
+                    selectElement.append(defaultOption);
+
+                    $.each(response.data, function(key, value) {
+                        var option = $('<option>', {
+                            value: value.id,
+                            text: value.nama
+                        });
+
+                        // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
+                        if (tempSelectedId !== null && tempSelectedId == value.id) {
+                            option.attr('selected', 'selected');
+                        }
+
+                        selectElement.append(option);
+                    });
+
+                    selectElement.trigger('change');
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", status, error);
+                }
+            });
+        }
+
+    });
+
+    function dataTipeJawabans(selectedId = null) {
+        $.ajax({
+            url: "{{ route('pertanyaan.data_tipe_jawaban') }}",
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var selectElement = $('#tipe_jawabans_id');
+                selectElement.empty();
+
+                var defaultOption = $('<option>', {
+                    value: '',
+                    text: '- Pilih Tipe -'
+                });
+                selectElement.append(defaultOption);
+
+                $.each(response.data, function(key, value) {
+                    var option = $('<option>', {
+                        value: value.id,
+                        text: value.nama
+                    });
+
+                    // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
+                    if (selectedId !== null && selectedId == value.id) {
+                        option.attr('selected', 'selected');
+                    }
+
+                    selectElement.append(option);
+                });
+
+                selectElement.trigger('change');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error: ' + error);
+            }
+        });
+    }
 </script>

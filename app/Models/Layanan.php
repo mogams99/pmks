@@ -14,6 +14,6 @@ class Layanan extends Model
 
     public function bidangs()
     { 
-        return $this->hasOne(Bidang::class, 'id', 'bidangs_id')->select('id', 'nama');;
+        return $this->hasOne(Bidang::class, 'id', 'bidangs_id')->select('id', 'nama');
     }
 }

@@ -23,6 +23,6 @@ class Opd extends Model
 
     public function peruntukans()
     { 
-        return $this->hasOne(Peruntukan::class, 'id', 'peruntukans_id')->select('id', 'nama');;
+        return $this->hasOne(Peruntukan::class, 'id', 'peruntukans_id')->select('id', 'nama');
     }
 }

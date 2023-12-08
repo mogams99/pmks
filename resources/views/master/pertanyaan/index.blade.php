@@ -20,8 +20,9 @@
                                         <tr>
                                             <th scope="col">No.</th>
                                             <th scope="col">Nama Pertanyaan</th>
-                                            <th scope="col">Layanan</th>
                                             <th scope="col">Tipe</th>
+                                            <th scope="col">Bidang - Layanan</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Aksi</th>
                                         </tr>
                                     </thead>
@@ -87,6 +88,16 @@
                         {
                             data: 'nama',
                             name: 'nama',
+                            className: 'fs-6 text-center',
+                        },
+                        {
+                            data: 'tipe_jawabans',
+                            name: 'tipe_jawabans',
+                            className: 'fs-6 text-center',
+                        },
+                        {
+                            data: 'layanans',
+                            name: 'layanans',
                             className: 'fs-6 text-center',
                         },
                         {
