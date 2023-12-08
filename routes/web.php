@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Master\RoleController;
 use App\Http\Controllers\Master\TipeJawabanController;
 use App\Http\Controllers\Master\UserController;
+use App\Http\Controllers\Transaksi\HasilJawabanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +62,9 @@ Route::middleware(['auth', 'access_check'])->group(function () {
         Route::get('/pertanyaan/data_layanan/{param}', [PertanyaanController::class, 'dataLayanan'])->name('pertanyaan.data_layanan');
         Route::get('/pertanyaan/data_tipe_jawaban', [PertanyaanController::class, 'dataTipeJawaban'])->name('pertanyaan.data_tipe_jawaban');
         Route::resource('/pertanyaan', PertanyaanController::class);
+    });
+
+    Route::prefix('/transaksi')->group(function () {
+        Route::resource('/hasil_jawaban', HasilJawabanController::class);
     });
 });

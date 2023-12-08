@@ -16,6 +16,7 @@ class HasilJawabanController extends Controller
     public function index()
     {
         //
+        return 'Sedang Maintenance';
     }
 
     /**
