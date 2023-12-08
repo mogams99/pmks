@@ -34,7 +34,7 @@ class Role extends Model
 
     static public function getTableAkses($id)
     {
-        $result = Role::select('menus.name as menu', 'roles.name as role', 'accesses.*')
+        $result = Role::select('menus.name as menu', 'roles.name as role', 'accesses.*', 'accesses.id as id_akses')
             ->leftJoin('accesses', 'roles.id', '=', 'accesses.roles_id')
             ->leftJoin('menus', 'menus.id', '=', 'accesses.menus_id')
             ->where('roles_id', $id)

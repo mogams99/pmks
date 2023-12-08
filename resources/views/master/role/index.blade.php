@@ -22,9 +22,7 @@
                                                 <th scope="col" class="text-center" width="10%">No.</th>
                                                 <th scope="col">Nama Role</th>
                                                 <th scope="col" class="text-center" width="10%">Status</th>
-                                                @if ($akses->update == 't' || $akses->delete == 't')
-                                                    <th scope="col" class="text-center" width="10%">Aksi</th>
-                                                @endif
+                                                <th scope="col" class="text-center" width="10%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -141,7 +139,7 @@
                 console.log(route, title);
 
                 $(document).ready(function() {
-                    let table = $('#table_akses').DataTable({
+                    let table_menu = $('#table_akses').DataTable({
                         processing: true,
                         autoWidth: false,
                         serverside: true,
@@ -202,6 +200,21 @@
                                 name: 'delete',
                                 // className: 'fs-6 text-center',
                             },
+                            {
+                                data: 'print',
+                                name: 'print',
+                                // className: 'fs-6 text-center',
+                            },
+                            {
+                                data: 'export',
+                                name: 'export',
+                                // className: 'fs-6 text-center',
+                            },
+                            {
+                                data: 'import',
+                                name: 'import',
+                                // className: 'fs-6 text-center',
+                            },
                             // {
                             //     data: 'action',
                             //     name: 'action',
@@ -226,6 +239,7 @@
                             /* load dist/assets/img/icons/logo-sby.svg inside processing set div for img loading */
                             processing: "<div class='d-flex justify-content-center align-items-center'><img src='{{ asset('dist/assets/media/logos/favicon.ico') }}' class='img-fluid' style='width: 100px; height: 100px;'></div>",
                         },
+                        destroy: true,
                     });
 
                     window.table = table;
@@ -233,6 +247,44 @@
             }
         </script>
         <!--End : Datatable Akses Roles-->
+
+        <!--Fungsi Untuk Aktif / Non Aktif Menu-->
+        <script>
+            // --- Start ceklis aktif / tidak aktif untuk sub menu
+            $('#table_akses').on('change', 'input[type="checkbox"]', function(e) {
+                var id = $(this).data('id');
+                var kolom = $(this).data('kolom');
+
+                if ($(this).is(":checked")) {
+                    var value = 'true'
+                } else {
+                    var value = 'false'
+                }
+
+                $.ajax({
+                    url: "{{ route('roles.setup') }}",
+                    method: 'POST',
+                    data: {
+                        // data yang ingin dikirim ke server
+                        id: id,
+                        kolom: kolom,
+                        value: value,
+                        _token: $('[name=csrf-token]').attr('content'),
+                    },
+                    success: function(response) {
+                        showAlert(response.message, 'success');
+                        window.table.ajax.reload();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR.responseJSON.message);
+                        var message = jqXHR.responseJSON.message;
+                        showAlert(message, 'gagal')
+                    }
+                });
+            });
+            // --- End ceklis aktif / tidak aktif untuk sub menu
+        </script>
+        <!--End : Fungsi Untuk Aktif / Non Aktif Menu-->
         @include('master.role.crud-scripts')
     @endpush
 @endsection

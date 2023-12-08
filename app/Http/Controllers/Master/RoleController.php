@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Models\Access;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -121,11 +123,94 @@ class RoleController extends Controller
         $data = Role::getTableAkses($id);
         return datatables($data)
             ->addIndexColumn()
+            ->editColumn('select', function ($data) {
+                $checked = $data->select ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="select" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('insert', function ($data) {
+                $checked = $data->insert ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="insert" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('update', function ($data) {
+                $checked = $data->update ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="update" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('delete', function ($data) {
+                $checked = $data->delete ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="delete" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('print', function ($data) {
+                $checked = $data->print ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="print" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('import', function ($data) {
+                $checked = $data->import ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="import" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
+            ->editColumn('export', function ($data) {
+                $checked = $data->export ? 'checked' : '';
+                return '
+                <label class="container">
+                    <input type="checkbox" name="is_active[]" id="is_active" data-id="' .  encrypt($data->id_akses) . '" data-kolom="export" value=""  ' . $checked . '>
+                    <span class="checkmark"></span>
+                </label>
+                ';
+            })
             ->addColumn('action', function ($data) {
                 return view('master.role.action', compact('data'));
             })
-            ->rawColumns(['action',])
+            ->rawColumns(['action', 'select', 'insert', 'update', 'delete', 'print', 'import', 'export'])
             ->make(true);
+    }
+
+    public function setup(Request $request)
+    {
+        $this->validate($request, [
+            'is_active' => 'boolean'
+        ]);
+        try {
+            $menu = Access::where('id', decrypt($request->id))->withTrashed()->first();
+            if (!empty($menu->deleted_at)) {
+                $menu->restore();
+            }
+            $kolom = $request->kolom;
+            $menu->$kolom = $request->boolean('value');
+            $menu->save();
+
+            return ResponseHelper::jsonResponse(201, 'Menu berhasil di perbarui', null, []);
+        } catch (\Throwable $th) {
+            return ResponseHelper::jsonResponse(500, 'Gagal menyimpan data!', null, []);
+        }
     }
     // End : Funsi untuk konfigurasi akses role
 }
