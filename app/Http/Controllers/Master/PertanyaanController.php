@@ -47,7 +47,7 @@ class PertanyaanController extends Controller
             ->addColumn('action', function ($data) {
                 return view('master.pertanyaan.action', compact('data'));
             })
-            ->rawColumns([ 'status', 'action'])
+            ->rawColumns(['status', 'action'])
             ->make(true);
     }
 
@@ -105,7 +105,8 @@ class PertanyaanController extends Controller
      */
     public function show(Pertanyaan $pertanyaan)
     {
-        $data = $pertanyaan->toArray();
+        $data = $pertanyaan->load('layanans')->toArray();
+        // dd($data);
         return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 

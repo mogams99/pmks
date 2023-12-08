@@ -57,8 +57,9 @@
 
                 resetInput(`${modal} form`);
                 loopForm(response.data);
+                console.log(response.data.layanans.bidangs_id);
                 tempSelectedId = response.data.layanans_id;
-                dataBidangs(response.data.bidangs_id);
+                dataBidangs(response.data.layanans.bidangs_id);
                 dataTipeJawabans(response.data.tipe_jawabans_id);
             })
             .fail(errors => {
@@ -248,11 +249,12 @@
         });
     }
 
+
     $("#bidangs_id").change(function() {
         const bidangId = $(this).val();
-
-        if (bidangId !== '') {
-            let url = '{{ route("pertanyaan.data_layanan", ["param" => ":bidangId"]) }}';
+        console.log(bidangId);
+        if (bidangId !== '' && bidangId) {
+            let url = '{{ route('pertanyaan.data_layanan', ['param' => ':bidangId']) }}';
             url = url.replace(":bidangId", bidangId);
 
             $.ajax({
@@ -277,7 +279,8 @@
                         });
 
                         // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
-                        if (tempSelectedId !== null && tempSelectedId == value.id) {
+                        if (tempSelectedId !== null && tempSelectedId == value
+                            .id) {
                             option.attr('selected', 'selected');
                         }
 
@@ -291,8 +294,7 @@
                 }
             });
         }
-
-    });
+    })
 
     function dataTipeJawabans(selectedId = null) {
         $.ajax({
