@@ -56,7 +56,7 @@ class PertanyaanController extends Controller
         $data = $layanan->select('id', 'bidangs_id', 'nama', 'status')
             ->where([
                 ['status', '=', true],
-                ['id', '=', $param],
+                ['bidangs_id', '=', $param],
             ])
             ->get();
 
@@ -106,7 +106,6 @@ class PertanyaanController extends Controller
     public function show(Pertanyaan $pertanyaan)
     {
         $data = $pertanyaan->load('layanans')->toArray();
-        // dd($data);
         return ResponseHelper::jsonResponse(201, 'Berhasil mengumpulkan data!', null, $data);
     }
 
@@ -123,7 +122,19 @@ class PertanyaanController extends Controller
      */
     public function update(UpdatePertanyaanRequest $request, Pertanyaan $pertanyaan)
     {
-        //
+        try {
+            // ? validasi input menggunakan UpdateOpdRequest
+            $request->validated();
+            // ? melakukan merge updated_by ke $request
+            $request->merge(['updated_by' => Auth::user()->id]);
+            // ? update data OPD
+            $pertanyaan->update($request->all());
+            // ? berikan respons berhasil
+            return ResponseHelper::jsonResponse(201, 'Berhasil mengubah data!', null, []);
+        } catch (\Exception $e) {
+            // ? tangani kesalahan umum
+            return ResponseHelper::jsonResponse(500, 'Gagal mengubah data!', null, []);
+        }
     }
 
     /**
@@ -131,6 +142,14 @@ class PertanyaanController extends Controller
      */
     public function destroy(Pertanyaan $pertanyaan)
     {
-        //
+        try {
+            $pertanyaan->deleted_by = Auth::user()->id;
+            $pertanyaan->save();
+            $pertanyaan->delete();
+
+            return ResponseHelper::jsonResponse(201, 'Berhasil menghapus data!', null, []);
+        } catch (\Throwable $th) {
+            return ResponseHelper::jsonResponse(500, 'Gagal menghapus data!', null, []);
+        }
     }
 }

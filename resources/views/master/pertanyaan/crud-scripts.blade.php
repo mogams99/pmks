@@ -55,10 +55,9 @@
                 $(`${modal} form`).attr('action', url);
                 $(`${modal} [name=_method]`).val('put');
 
+                tempSelectedId = response.data.layanans_id;
                 resetInput(`${modal} form`);
                 loopForm(response.data);
-                console.log(response.data.layanans.bidangs_id);
-                tempSelectedId = response.data.layanans_id;
                 dataBidangs(response.data.layanans.bidangs_id);
                 dataTipeJawabans(response.data.tipe_jawabans_id);
             })
@@ -87,11 +86,9 @@
                     })
                     .done((response) => {
                         showAlert(response.message, 'success');
-                        // timeOut();
                         window.table.ajax.reload();
                     })
                     .fail((errors) => {
-                        console.log(errors);
                         var message = 'Data gagal dihapus'
                         showAlert(message, 'gagal')
                     })
@@ -122,7 +119,6 @@
                         window.table.ajax.reload();
                     })
                     .fail((errors) => {
-                        console.log(errors);
                         var message = 'Data gagal diaktifkan'
                         showAlert(message, 'gagal')
                     })
@@ -249,19 +245,16 @@
         });
     }
 
-
     $("#bidangs_id").change(function() {
         const bidangId = $(this).val();
-        console.log(bidangId);
         if (bidangId !== '' && bidangId) {
-            let url = '{{ route('pertanyaan.data_layanan', ['param' => ':bidangId']) }}';
+            let url = "{{ route('pertanyaan.data_layanan', ['param' => ':bidangId']) }}";
             url = url.replace(":bidangId", bidangId);
 
             $.ajax({
                 url,
                 type: "GET",
                 success: function(response) {
-
                     var selectElement = $('#layanans_id');
                     selectElement.attr('disabled', false);
                     selectElement.empty();
@@ -277,8 +270,7 @@
                             value: value.id,
                             text: value.nama
                         });
-
-                        // Tandai opsi sebagai "selected" jika ID cocok dengan parameter
+                        
                         if (tempSelectedId !== null && tempSelectedId == value
                             .id) {
                             option.attr('selected', 'selected');
